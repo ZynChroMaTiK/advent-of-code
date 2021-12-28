@@ -12,10 +12,10 @@ INPUT.each do |i|
   y += i[1] if i[0] == 'down'
   y -= i[1] if i[0] == 'up'
 end
-puts "x #{x}, y #{y}" # 2162, 1051
-puts "x*y = #{x * y}" # 2272262
+puts "x #{x}, y #{y}"
+puts "x*y = #{x * y}"
 
-#Part Two
+# Part Two
 a = x = y = 0
 INPUT.each do |i|
   if i[0] == 'forward'
@@ -25,5 +25,5 @@ INPUT.each do |i|
   a += i[1] if i[0] == 'down'
   a -= i[1] if i[0] == 'up'
 end
-puts "x #{x}, y #{y}" #
-puts "x*y = #{x * y}" #
+puts "x #{x}, y #{y}"
+puts "x*y = #{x * y}"
