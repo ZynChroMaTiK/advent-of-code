@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-INPUT = File.readlines("#{__dir__}/input.txt").map(&:to_i)
+INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).map(&:to_i)
 
 # Part One
 # Compare between each measurement and the next one

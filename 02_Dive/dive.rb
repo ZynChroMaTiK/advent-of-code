@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-INPUT = File.readlines("#{__dir__}/input.txt").map do |i|
+INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).map do |i|
   cmd = i.split
   [cmd[0], cmd[1].to_i]
 end
