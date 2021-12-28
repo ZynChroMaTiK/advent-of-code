@@ -3,7 +3,7 @@
 # Convert input to arrays of integers
 INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).map { |n| n.each_char.map(&:to_i) }
 # Compare sums on each bit index to get average bits as gamma
-sum = INPUT.transpose.map { |n| n.sum / (INPUT.count / 2) }
+sum = INPUT.transpose.map { |n| n.sum / (INPUT.count / 2.0).ceil }
 # Gamma bits to decimal
 gam = sum.join.to_i(2)
 # Epsilon is one's complement of gamma
@@ -24,20 +24,14 @@ co2 = INPUT - oxy
 (1..11).each do |i|
   # Oxygen generator
   if oxy.count > 1
-    oxy_ct = oxy.count
-    hlf = (oxy_ct / 2.0).ceil
-    sum = oxy.map {|n| n[i]}.sum
     # Select most common or 1 if equal
-    avg = (sum == hlf && hlf * 2 == oxy_ct) ? 1 : sum / hlf
+    avg = oxy.map { |n| n[i] }.sum / (oxy.count / 2.0).ceil
     oxy = oxy.select { |n| n[i] == avg }
   end
   # CO2 scrubber
   if co2.count > 1
-    co2_ct = co2.count
-    hlf = (co2_ct / 2.0).ceil
-    sum = co2.map {|n| n[i]}.sum
     # Select least common or 0 if equal
-    avg = (sum == hlf && hlf * 2 == co2_ct) ? 1 : sum / hlf
+    avg = co2.map { |n| n[i] }.sum / (co2.count / 2.0).ceil
     co2 = co2.select { |n| n[i] == avg ^ 1 }
   end
 end
