@@ -1,4 +1,4 @@
-# Part One
+# frozen_string_literal: true
 
 INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).reject(&:empty?)
 draws = INPUT.shift.split(',').map(&:to_i)
@@ -9,11 +9,11 @@ winners = []
 class Array
   # BOARD - Marks drawn number in board
   def mark(draw)
-    ri = index { |r| r.include?(draw) }
-    return unless ri
+    ri = index { |r| r.include?(draw) } # Find row index with draw number
+    return unless ri                    # Break if index not found
 
-    r = self[ri]
-    r[r.index(draw)] = '*'
+    r = self[ri]                        # Get row from index
+    r[r.index(draw)] = '*'              # Mark drawn number in row
   end
 
   # ROW - Removes marked numbers for row counting or scoring
@@ -23,8 +23,8 @@ class Array
 
   # BOARD - Checks in board if at least one row or column is fully marked
   def win?
-    rows_win = ->(b) { b.map(&:clean).reject(&:empty?).count != 5 }
-    rows_win.call(self) || rows_win.call(transpose)
+    rows_win = ->(b) { b.map(&:clean).reject(&:empty?).count != 5 } # λ exp to count non fully marked rows
+    rows_win.call(self) || rows_win.call(transpose)                 # Check rows and columns (rows from rotated board)
   end
 
   # BOARD - Calculates score of winning board
@@ -33,10 +33,11 @@ class Array
   end
 end
 
+# Part One and Two
+
 draws.each do |d|
   break unless boards.any?
 
-  puts "Marking #{d}"
   boards.each do |b|
     b.mark(d)
     next unless b.win?
@@ -45,5 +46,5 @@ draws.each do |d|
     boards -= [b]
   end
 end
-puts "first = #{winners.first}" # 5685
-puts "last = #{winners.last}" # 21070
+puts "first #{winners.first}" # 5685
+puts "last  #{winners.last}" # 21070
