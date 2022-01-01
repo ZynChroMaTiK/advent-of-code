@@ -3,7 +3,9 @@
 INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).reject(&:empty?)
 draws = INPUT.shift.split(',').map(&:to_i)
 boards = INPUT.each_slice(5).map { |b| b.map { |l| l.split.map(&:to_i) } }
+winners = []
 
+# New Array instance methods for boards
 class Array
   # BOARD - Marks drawn number in board
   def mark(draw)
@@ -30,8 +32,6 @@ class Array
     map(&:clean).flatten.sum * draw
   end
 end
-
-winners = []
 
 draws.each do |d|
   boards.each do |b|
