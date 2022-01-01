@@ -1,29 +1,23 @@
 # frozen_string_literal: true
 
-INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).map do |i|
-  cmd = i.split
-  [cmd[0], cmd[1].to_i]
-end
+x = y1 = y2 = a = 0
 
-# Part One
-x = y = 0
-INPUT.each do |i|
-  x += i[1] if i[0] == 'forward'
-  y += i[1] if i[0] == 'down'
-  y -= i[1] if i[0] == 'up'
-end
-puts "x #{x}, y #{y}"
-puts "x*y = #{x * y}"
+INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).each do |i| # Iteration on each input line
+  d, u = i.split # Direction, Units
+  u = u.to_i
 
-# Part Two
-a = x = y = 0
-INPUT.each do |i|
-  if i[0] == 'forward'
-    x += i[1]
-    y += i[1] * a
+  case d
+  when 'forward'
+    x += u      # P12
+    y2 += u * a # P2
+  when 'down'
+    y1 += u     # P1
+    a += u      # P2
+  else # when 'up'
+    y1 -= u     # P1
+    a -= u      # P2
   end
-  a += i[1] if i[0] == 'down'
-  a -= i[1] if i[0] == 'up'
 end
-puts "x #{x}, y #{y}"
-puts "x*y = #{x * y}"
+
+puts "P1- #{x} * #{y1} = #{x * y1}" # 2272262
+puts "P2- #{x} * #{y2} = #{x * y2}" # 2134882034
