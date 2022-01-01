@@ -34,10 +34,16 @@ class Array
 end
 
 draws.each do |d|
+  break unless boards.any?
+
+  puts "Marking #{d}"
   boards.each do |b|
     b.mark(d)
-    winners << b.score(d) if b.win?
+    next unless b.win?
+
+    winners << b.score(d)
+    boards -= [b]
   end
 end
-
-puts winners.first
+puts "first = #{winners.first}" # 5685
+puts "last = #{winners.last}"
