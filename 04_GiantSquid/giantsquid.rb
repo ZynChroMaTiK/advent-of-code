@@ -46,4 +46,4 @@ draws.each do |d|
   end
 end
 puts "first = #{winners.first}" # 5685
-puts "last = #{winners.last}"
+puts "last = #{winners.last}" # 21070
