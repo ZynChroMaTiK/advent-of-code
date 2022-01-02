@@ -2,7 +2,7 @@
 
 x = y1 = y2 = a = 0
 
-INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).each do |i| # Iteration on each input line
+File.readlines("#{__dir__}/input.txt", chomp: true).each do |i| # Iteration on each input line
   d, u = i.split # Direction, Units
   u = u.to_i
 

@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).reject(&:empty?)
-draws = INPUT.shift.split(',').map(&:to_i)
-boards = INPUT.each_slice(5).map { |b| b.map { |l| l.split.map(&:to_i) } }
-winners = []
-
 # New Array instance methods for boards
 class Array
   # BOARD - Marks drawn number in board
@@ -33,8 +28,12 @@ class Array
   end
 end
 
-# Part One and Two
+INPUT = File.readlines("#{__dir__}/input.txt", chomp: true).reject(&:empty?)
+draws = INPUT.shift.split(',').map(&:to_i)
+boards = INPUT.each_slice(5).map { |b| b.map { |l| l.split.map(&:to_i) } }
+winners = []
 
+# PART ONE and TWO
 draws.each do |d|
   break unless boards.any?
 
